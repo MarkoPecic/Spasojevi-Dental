@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Spasojević Dental - Stomatološka ordinacija Trstenik | Implanti, proteze, beljenje zuba</title>
+  <meta name="description" content="Stomatološka ordinacija Spasojević Dental u Trsteniku. Implanti, ortodoncija, krunice, popravka i beljenje zuba za celu porodicu. Zakažite pregled: 065 504 3698." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #FFFFFF; color: #111827; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: #0E7490; text-decoration: none; }
+    a:hover { color: #14B8A6; }
+    h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+  </style>
+</helmet>
+
+<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: {{ navBg }}; border-bottom: 1px solid {{ navBorder }}; transition: background 0.3s ease, border-color 0.3s ease;">
+  <nav aria-label="Glavna navigacija" style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+    <a href="#pocetna" style="display: flex; align-items: center; gap: 11px; color: {{ navText }};">
+      <span style="width: 40px; height: 40px; background: {{ logoBg }}; border-radius: 12px; display: grid; place-items: center; box-shadow: inset 0 0 0 1px {{ logoRing }};">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="{{ logoText }}" aria-hidden="true"><path d="M12 3.2c-1.9 0-3.1 1-4.9 1-1.7 0-2.7-1.1-3.6.6-.8 1.6-.5 4.3.5 7.8.7 2.5 1.1 5.9 2.6 5.9 1.2 0 1.5-2 1.9-3.8.3-1.3.7-2.1 2-2.1s1.7.8 2 2.1c.4 1.8.7 3.8 1.9 3.8 1.5 0 1.9-3.4 2.6-5.9 1-3.5 1.3-6.2.5-7.8-.9-1.7-1.9-.6-3.6-.6-1.8 0-3-1-4.9-1z"></path></svg>
+      </span>
+      <span style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; line-height: 1;">{{ brandMain }} <span style="color: #14B8A6;">{{ brandSub }}</span></span>
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; align-items: center; gap: clamp(20px, 2.6vw, 40px);">
+        <a href="#pocetna" style="color: {{ navText }}; font-size: 15px; font-weight: 500; opacity: 0.9; white-space: nowrap;" style-hover="opacity: 1;">Početna</a>
+        <a href="#usluge" style="color: {{ navText }}; font-size: 15px; font-weight: 500; opacity: 0.9; white-space: nowrap;" style-hover="opacity: 1;">Usluge</a>
+        <a href="#zasto-mi" style="color: {{ navText }}; font-size: 15px; font-weight: 500; opacity: 0.9; white-space: nowrap;" style-hover="opacity: 1;">Zašto mi</a>
+        <a href="#pitanja" style="color: {{ navText }}; font-size: 15px; font-weight: 500; opacity: 0.9; white-space: nowrap;" style-hover="opacity: 1;">Česta pitanja</a>
+        <a href="#kontakt" style="color: {{ navText }}; font-size: 15px; font-weight: 500; opacity: 0.9; white-space: nowrap;" style-hover="opacity: 1;">Kontakt</a>
+        <a href="#kontakt" style="background: {{ navCtaBg }}; color: {{ navCtaText }}; font-size: 15px; font-weight: 600; padding: 12px 24px; border-radius: 999px; border: 1px solid {{ navCtaBorder }}; transition: background 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap;">Zakažite pregled</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="Meni" style="background: none; border: 1px solid {{ navText }}; border-radius: 999px; padding: 11px 13px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; opacity: 0.85;">
+        <span style="display: block; width: 18px; height: 2px; background: {{ navText }};"></span>
+        <span style="display: block; width: 18px; height: 2px; background: {{ navText }};"></span>
+        <span style="display: block; width: 18px; height: 2px; background: {{ navText }};"></span>
+      </button>
+    </sc-if>
+  </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="background: #FFFFFF; border-top: 1px solid #E5E7EB; padding: 12px clamp(20px, 4vw, 48px) 20px; display: flex; flex-direction: column; gap: 2px;">
+      <a href="#pocetna" onClick="{{ closeMenu }}" style="color: #111827; font-weight: 500; padding: 13px 4px; border-bottom: 1px solid #F1F5F9;">Početna</a>
+      <a href="#usluge" onClick="{{ closeMenu }}" style="color: #111827; font-weight: 500; padding: 13px 4px; border-bottom: 1px solid #F1F5F9;">Usluge</a>
+      <a href="#zasto-mi" onClick="{{ closeMenu }}" style="color: #111827; font-weight: 500; padding: 13px 4px; border-bottom: 1px solid #F1F5F9;">Zašto mi</a>
+      <a href="#pitanja" onClick="{{ closeMenu }}" style="color: #111827; font-weight: 500; padding: 13px 4px; border-bottom: 1px solid #F1F5F9;">Česta pitanja</a>
+      <a href="#kontakt" onClick="{{ closeMenu }}" style="color: #111827; font-weight: 500; padding: 13px 4px;">Kontakt</a>
+      <a href="#kontakt" onClick="{{ closeMenu }}" style="background: #0E7490; color: #FFFFFF; text-align: center; font-weight: 600; padding: 14px; border-radius: 999px; margin-top: 10px;">Zakažite pregled</a>
+    </div>
+  </sc-if>
+</header>
+
+<main>
+<section id="pocetna" data-screen-label="Hero" style="position: relative; min-height: 92vh; padding-top: clamp(100px, 13vh, 150px); box-sizing: border-box; display: flex; align-items: flex-end; background-image: url('images/hero-bg.png'); background-size: cover; background-position: 60% center;">
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,28,32,0.6) 0%, rgba(6,28,32,0.08) 20%, rgba(6,28,32,0.12) 44%, rgba(6,28,32,0.78) 82%, rgba(6,28,32,0.9) 100%);"></div>
+  <div style="position: relative; width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px) clamp(40px, 6vh, 72px); box-sizing: border-box;">
+    <div style="max-width: 680px;">
+      <p style="margin: 0 0 22px; color: #7FE0D4; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;">Stomatološka ordinacija · Trstenik</p>
+      <h1 style="margin: 0 0 22px; font-size: clamp(40px, 6.2vw, 72px); line-height: 1.0; letter-spacing: -0.035em; font-weight: 800; color: #FFFFFF; text-wrap: balance;">Zdrav osmeh počinje na pravom mestu.</h1>
+      <p style="margin: 0 0 34px; font-size: clamp(16px, 2vw, 19px); line-height: 1.6; color: rgba(255,255,255,0.86); max-width: 500px; text-wrap: pretty;">Brinemo o zdravlju i izgledu vaših zuba kroz savremene stomatološke tretmane za celu porodicu.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+        <a href="#kontakt" style="display: inline-flex; align-items: center; gap: 12px; background: #FFFFFF; color: #06231C; font-weight: 700; font-size: 16px; padding: 8px 8px 8px 26px; border-radius: 999px; transition: transform 0.2s;" style-hover="transform: translateY(-2px); color: #06231C;">Zakažite pregled <span style="width: 40px; height: 40px; border-radius: 999px; background: #0E7490; color: #FFFFFF; display: grid; place-items: center; font-size: 18px;" aria-hidden="true">→</span></a>
+        <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.14); color: #FFFFFF; font-weight: 600; font-size: 16px; padding: 16px 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.32); transition: background 0.2s;" style-hover="background: rgba(255,255,255,0.24); color: #FFFFFF;">Pozovite nas · {{ phone }}</a>
+      </div>
+    </div>
+
+    <div style="margin-top: clamp(40px, 6vh, 68px); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+        <button onClick="{{ st.select }}" style="position: relative; text-align: left; cursor: pointer; border-radius: 18px; padding: 22px 22px; border: 1px solid {{ st.border }}; background: {{ st.bg }}; -webkit-backdrop-filter: blur(10px) saturate(1.7) brightness(1.08); backdrop-filter: blur(10px) saturate(1.7) brightness(1.08); box-shadow: 0 10px 26px -8px rgba(6,28,32,0.55), inset 1.5px 1.5px 1px -1px rgba(255,255,255,0.55), inset 0 0 0 0.5px rgba(255,255,255,0.06); transition: background 0.2s, border-color 0.2s;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <span style="width: 34px; height: 34px; border-radius: 999px; background: {{ st.numBg }}; color: {{ st.numColor }}; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 15px; display: grid; place-items: center;">{{ st.num }}</span>
+            <h3 style="margin: 0; font-size: 16px; font-weight: 700; color: #FFFFFF;">{{ st.title }}</h3>
+          </div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: {{ st.descColor }};">{{ st.desc }}</p>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="zasto-mi" data-screen-label="O nama" style="padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px; align-items: center;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #F1F5F6; border-radius: 999px; padding: 7px 16px; margin-bottom: 24px;">
+        <span style="width: 7px; height: 7px; border-radius: 999px; background: #14B8A6;"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em;">Zašto baš mi</span>
+      </div>
+      <p id="reveal-statement" style="margin: 0; font-family: 'Manrope', sans-serif; font-size: clamp(24px, 3.4vw, 36px); line-height: 1.28; letter-spacing: -0.02em; font-weight: 700; text-wrap: pretty;"><sc-for list="{{ statementWords }}" as="w" hint-placeholder-count="21"><span data-w="" style="color: rgba(17,24,39,0.24);">{{ w }} </span></sc-for></p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="5">
+        <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 20px; padding: 22px 24px; display: flex; gap: 18px; align-items: flex-start;">
+          <span style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 13px; color: #0E7490; background: #E6F4F5; border-radius: 999px; padding: 8px 11px; flex-shrink: 0;">{{ b.num }}</span>
+          <div>
+            <h3 style="margin: 0 0 5px; font-size: 16.5px; font-weight: 700;">{{ b.title }}</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #6B7280;">{{ b.desc }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Poverenje" style="background: #F6F8F9; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB; padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px;">
+    <sc-for list="{{ trust }}" as="t" hint-placeholder-count="4">
+      <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 22px; padding: 30px 26px;">
+        <div style="width: 48px; height: 48px; border-radius: 14px; background: #E6F4F5; display: grid; place-items: center; margin-bottom: 18px;">{{ t.icon }}</div>
+        <h3 style="margin: 0 0 8px; font-size: 17px; font-weight: 700;">{{ t.title }}</h3>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #6B7280;">{{ t.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="usluge" data-screen-label="Usluge" style="padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="max-width: 620px; margin-bottom: 52px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #F1F5F6; border-radius: 999px; padding: 7px 16px; margin-bottom: 22px;">
+        <span style="width: 7px; height: 7px; border-radius: 999px; background: #14B8A6;"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em;">Usluge</span>
+      </div>
+      <h2 style="margin: 0 0 16px; font-size: clamp(30px, 4.4vw, 48px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Sve za vaše zube, na jednom mestu</h2>
+      <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #6B7280;">Od redovne kontrole do implanta. Recite nam šta vas muči, a mi ćemo predložiti rešenje koje vam odgovara.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px;">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="15">
+        <div style="border: 1px solid #E5E7EB; border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px; background: #FCFDFD; transition: border-color 0.2s, background 0.2s;" style-hover="border-color: #0E7490; background: #FFFFFF;">
+          <div style="width: 46px; height: 46px; border-radius: 13px; background: #E6F4F5; display: grid; place-items: center;">{{ s.icon }}</div>
+          <h3 style="margin: 6px 0 0; font-size: 17.5px; font-weight: 700;">{{ s.title }}</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #6B7280; flex: 1;">{{ s.desc }}</p>
+          <a href="#kontakt" style="font-size: 14px; font-weight: 600; color: #0E7490; display: inline-flex; align-items: center; gap: 6px;">Saznajte više <span aria-hidden="true">→</span></a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="doktor" data-screen-label="Doktor" style="background: #F6F8F9; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB; padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; align-items: stretch;">
+    <div style="border-radius: 26px; overflow: hidden; border: 1px solid #E5E7EB; min-height: 400px; position: relative;">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="doktor-slika" shape="rect" placeholder="DOKTOR" hint-size="100%,400px"></x-import>
+    </div>
+    <div style="background: #0B2A2F; border-radius: 26px; padding: clamp(32px, 4vw, 56px); display: flex; flex-direction: column; justify-content: center; color: #FFFFFF;">
+      <p style="margin: 0 0 18px; color: #7FE0D4; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;">Vaš stomatolog</p>
+      <h2 style="margin: 0 0 18px; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 800; text-wrap: balance;">Lečenje kakvo biste poželeli i sebi</h2>
+      <p style="margin: 0 0 28px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.8);">Ne žurimo i ne radimo napamet. Svaki zub gledamo pojedinačno, objasnimo šta i zašto radimo, i uradimo temeljno. Ako imate strah od zubara, prilagodićemo tempo vama.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+        <a href="#kontakt" style="background: #FFFFFF; color: #0B2A2F; font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 999px;" style-hover="color: #0B2A2F; background: #E6F4F5;">Zakažite pregled</a>
+        <a href="{{ telHref }}" style="background: transparent; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px 26px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.3);" style-hover="color: #FFFFFF; background: rgba(255,255,255,0.1);">{{ phone }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerija" data-screen-label="Galerija" style="padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="max-width: 600px; margin-bottom: 44px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #F1F5F6; border-radius: 999px; padding: 7px 16px; margin-bottom: 22px;">
+        <span style="width: 7px; height: 7px; border-radius: 999px; background: #14B8A6;"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em;">Galerija</span>
+      </div>
+      <h2 style="margin: 0; font-size: clamp(30px, 4.4vw, 48px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Pogledajte gde vas lečimo</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="border-radius: 22px; overflow: hidden; border: 1px solid #E5E7EB; height: 260px;"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="gal-doktor" shape="rect" placeholder="DOKTOR" hint-size="100%,260px"></x-import></div>
+        <p style="margin: 0 4px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; color: #6B7280;">DOKTOR</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="border-radius: 22px; overflow: hidden; border: 1px solid #E5E7EB; height: 260px;"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="gal-ordinacija" shape="rect" src="images/cekaonica.png" placeholder="ORDINACIJA" hint-size="100%,260px"></x-import></div>
+        <p style="margin: 0 4px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; color: #6B7280;">ORDINACIJA</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="border-radius: 22px; overflow: hidden; border: 1px solid #E5E7EB; height: 260px;"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="gal-oprema" shape="rect" placeholder="OPREMA" hint-size="100%,260px"></x-import></div>
+        <p style="margin: 0 4px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; color: #6B7280;">OPREMA</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="border-radius: 22px; overflow: hidden; border: 1px solid #E5E7EB; height: 260px;"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="gal-pacijent" shape="rect" placeholder="PACIJENT" hint-size="100%,260px"></x-import></div>
+        <p style="margin: 0 4px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; color: #6B7280;">PACIJENT</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="utisci" data-screen-label="Utisci" style="background: #F6F8F9; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB; padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="max-width: 600px; margin-bottom: 44px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 999px; padding: 7px 16px; margin-bottom: 22px;">
+        <span style="width: 7px; height: 7px; border-radius: 999px; background: #14B8A6;"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em;">Utisci pacijenata</span>
+      </div>
+      <h2 style="margin: 0; font-size: clamp(30px, 4.4vw, 48px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Šta kažu naši pacijenti</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+      <sc-for list="{{ testimonials }}" as="tm" hint-placeholder-count="3">
+        <figure style="margin: 0; border: 1px solid #E5E7EB; border-radius: 22px; padding: 28px 26px; display: flex; flex-direction: column; gap: 14px; background: #FFFFFF;">
+          <div aria-label="5 od 5 zvezdica" style="color: #14B8A6; font-size: 16px; letter-spacing: 3px;">★★★★★</div>
+          <blockquote style="margin: 0; font-size: 15.5px; line-height: 1.65; color: #374151; flex: 1;">{{ tm.text }}</blockquote>
+          <figcaption style="display: flex; align-items: center; gap: 12px;">
+            <span style="width: 40px; height: 40px; border-radius: 999px; background: #E6F4F5; color: #0E7490; display: grid; place-items: center; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 15px;">{{ tm.initial }}</span>
+            <span style="font-size: 14px; font-weight: 600; color: #111827;">{{ tm.name }}<span style="display: block; font-weight: 400; color: #6B7280; margin-top: 2px;">{{ tm.place }}</span></span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="pitanja" data-screen-label="Česta pitanja" style="padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px; align-items: start;">
+    <div style="position: sticky; top: 100px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #F1F5F6; border-radius: 999px; padding: 7px 16px; margin-bottom: 22px;">
+        <span style="width: 7px; height: 7px; border-radius: 999px; background: #14B8A6;"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em;">Česta pitanja</span>
+      </div>
+      <h2 style="margin: 0 0 16px; font-size: clamp(30px, 4.4vw, 48px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Pitate nas, odgovaramo</h2>
+      <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65; color: #6B7280;">Nema odgovora na vaše pitanje? Pozovite nas, rado ćemo objasniti.</p>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 9px; background: #0E7490; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 13px 24px; border-radius: 999px;" style-hover="background: #0C6076; color: #FFFFFF;">Pozovite · {{ phone }}</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 20px; overflow: hidden;">
+          <button onClick="{{ f.toggle }}" style="width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 24px; text-align: left; font-family: 'Manrope', sans-serif; font-size: 16.5px; font-weight: 700; color: #111827;">
+            {{ f.q }}
+            <span style="color: #0E7490; font-size: 22px; font-weight: 400; transform: {{ f.chev }}; transition: transform 0.2s; flex-shrink: 0;">+</span>
+          </button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 0 24px 22px; font-size: 15px; line-height: 1.7; color: #4B5563;">{{ f.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" data-screen-label="Kontakt" style="background: #0B2A2F; padding: clamp(64px, 9vw, 112px) clamp(20px, 4vw, 48px);">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="text-align: center; max-width: 640px; margin: 0 auto 56px; color: #FFFFFF;">
+      <p style="margin: 0 0 18px; color: #7FE0D4; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;">Kontakt</p>
+      <h2 style="margin: 0 0 16px; font-size: clamp(30px, 4.6vw, 52px); line-height: 1.06; letter-spacing: -0.025em; font-weight: 800; text-wrap: balance;">Zakažite pregled već danas</h2>
+      <p style="margin: 0 auto 32px; max-width: 480px; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.8);">Jedan poziv je dovoljan. Dogovorićemo termin koji vam odgovara.</p>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 14px; background: #FFFFFF; color: #0B2A2F; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 30px); padding: 12px 12px 12px 32px; border-radius: 999px;" style-hover="color: #0B2A2F;">{{ phone }} <span style="width: 48px; height: 48px; border-radius: 999px; background: #0E7490; color: #FFFFFF; display: grid; place-items: center;" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"></path></svg></span></a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; align-items: stretch;">
+      <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14); border-radius: 26px; padding: 34px 30px; color: #FFFFFF;">
+        <h3 style="margin: 0 0 18px; font-size: 18px; font-weight: 700;">Adresa</h3>
+        <p style="margin: 0 0 28px; font-size: 15.5px; line-height: 1.7; color: rgba(255,255,255,0.78);">Obrena Antića 20<br />Sedmi Juli bb<br />37240 Trstenik, Srbija</p>
+        <h3 style="margin: 0 0 16px; font-size: 18px; font-weight: 700;">Radno vreme</h3>
+        <div style="display: flex; flex-direction: column; gap: 9px;">
+          <sc-for list="{{ hours }}" as="h" hint-placeholder-count="7">
+            <div style="display: flex; justify-content: space-between; gap: 16px; font-size: 14.5px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 9px;">
+              <span style="color: #FFFFFF; font-weight: 500;">{{ h.day }}</span>
+              <span style="color: {{ h.color }};">{{ h.time }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <a href="https://www.google.com/maps/place/Dis/@43.6157894,21.0086163,18.55z/data=!4m10!1m2!2m1!1strstenik+zubar!3m6!1s0x47565f4b9d1c58d7:0xe3f935e2c9f1243a!8m2!3d43.6158132!4d21.0092927!15sCg50cnN0ZW5payB6dWJhcpIBB2RlbnRpc3TgAQA!16s%2Fg%2F1pyd1n4jl?entry=ttu" target="_blank" rel="noopener noreferrer" aria-label="Otvorite lokaciju na Google mapama" style="display: block; position: relative; border: 1px solid rgba(255,255,255,0.14); border-radius: 26px; overflow: hidden; min-height: 400px;">
+        <img src="images/mapa.png" alt="Mapa lokacije ordinacije Spasojević Dental, Obrena Antića 20, Trstenik" style="display: block; width: 100%; height: 100%; min-height: 400px; object-fit: cover;" />
+        <span style="position: absolute; left: 20px; bottom: 20px; display: inline-flex; align-items: center; gap: 9px; background: #FFFFFF; color: #0B2A2F; font-weight: 600; font-size: 14px; padding: 11px 18px; border-radius: 999px; box-shadow: 0 6px 18px -6px rgba(6,28,32,0.5);">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Otvori u Google mapama
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer style="background: #06231C; color: #E6EFF0; padding: clamp(56px, 7vw, 80px) clamp(20px, 4vw, 48px) 40px;">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 44px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <span style="width: 40px; height: 40px; background: #14B8A6; border-radius: 12px; display: grid; place-items: center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#062024" aria-hidden="true"><path d="M12 3.2c-1.9 0-3.1 1-4.9 1-1.7 0-2.7-1.1-3.6.6-.8 1.6-.5 4.3.5 7.8.7 2.5 1.1 5.9 2.6 5.9 1.2 0 1.5-2 1.9-3.8.3-1.3.7-2.1 2-2.1s1.7.8 2 2.1c.4 1.8.7 3.8 1.9 3.8 1.5 0 1.9-3.4 2.6-5.9 1-3.5 1.3-6.2.5-7.8-.9-1.7-1.9-.6-3.6-.6-1.8 0-3-1-4.9-1z"></path></svg>
+          </span>
+          <span style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; color: #FFFFFF;">{{ brandMain }} <span style="color: #7FE0D4;">{{ brandSub }}</span></span>
+        </div>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: rgba(230,239,240,0.6); max-width: 260px;">Stomatološka ordinacija za celu porodicu u Trsteniku.</p>
+      </div>
+      <div>
+        <h3 style="margin: 0 0 16px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(230,239,240,0.5);">Navigacija</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="#pocetna" style="color: #E6EFF0; font-size: 14.5px;" style-hover="color: #7FE0D4;">Početna</a>
+          <a href="#usluge" style="color: #E6EFF0; font-size: 14.5px;" style-hover="color: #7FE0D4;">Usluge</a>
+          <a href="#zasto-mi" style="color: #E6EFF0; font-size: 14.5px;" style-hover="color: #7FE0D4;">Zašto mi</a>
+          <a href="#pitanja" style="color: #E6EFF0; font-size: 14.5px;" style-hover="color: #7FE0D4;">Česta pitanja</a>
+          <a href="#kontakt" style="color: #E6EFF0; font-size: 14.5px;" style-hover="color: #7FE0D4;">Kontakt</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin: 0 0 16px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(230,239,240,0.5);">Kontakt</h3>
+        <p style="margin: 0 0 10px; font-size: 14.5px; line-height: 1.65; color: #E6EFF0;">Obrena Antića 20<br />37240 Trstenik</p>
+        <a href="{{ telHref }}" style="color: #7FE0D4; font-size: 15px; font-weight: 600;">{{ phone }}</a>
+      </div>
+      <div>
+        <h3 style="margin: 0 0 16px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(230,239,240,0.5);">Radno vreme</h3>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.8; color: #E6EFF0;">Pon - Pet: 10:00 - 14:00<br />i 17:00 - 20:00<br /><span style="color: rgba(230,239,240,0.55);">Subota i nedelja: ne radimo</span></p>
+      </div>
+    </div>
+    <p style="margin: 28px 0 0; font-size: 13.5px; color: rgba(230,239,240,0.5); text-align: center;">© 2026 {{ brandName }}. Sva prava zadržana.</p>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Spasojević Dental&quot;, &quot;DIS Dental&quot;], &quot;default&quot;: &quot;Spasojević Dental&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Brend&quot;}, &quot;phone&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;065 504 3698&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Brend&quot;}}">
+class Component extends DCLogic {
+  state = { scrolled: false, menuOpen: false, openFaq: 0, isMobile: false, activeStep: 0 };
+  componentDidMount() {
+    this.onScroll = () => {
+      const s = window.scrollY > 40;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+      this.revealCheck();
+      this.updateWordReveal();
+    };
+    this.mq = window.matchMedia('(max-width: 768px)');
+    this.onMq = () => this.setState({ isMobile: this.mq.matches });
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    this.mq.addEventListener('change', this.onMq);
+    this.onMq();
+    this.setupReveal();
+    this._wordSpans = document.querySelectorAll('#reveal-statement [data-w]');
+    this.onScroll();
+  }
+  setupReveal() {
+    const targets = [];
+    document.querySelectorAll('main > section').forEach((sec) => {
+      if (sec.id === 'pocetna' || sec.id === 'pitanja') return;
+      const inner = sec.querySelector(':scope > div');
+      if (inner) targets.push(inner);
+    });
+    const footerInner = document.querySelector('footer > div');
+    if (footerInner) targets.push(footerInner);
+    this._revealTargets = targets;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+    targets.forEach((el) => {
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+      el.style.willChange = 'opacity, transform';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.dataset.revealPending = '1';
+    });
+    this.revealCheck();
+    // safety: never leave anything hidden
+    this._revealSafety = setTimeout(() => this.revealAll(), 2600);
+  }
+  revealCheck() {
+    const targets = this._revealTargets;
+    if (!targets) return;
+    const vh = window.innerHeight || 800;
+    targets.forEach((el) => {
+      if (el.dataset.revealPending !== '1') return;
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.9) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.dataset.revealPending = '0';
+      }
+    });
+  }
+  revealAll() {
+    (this._revealTargets || []).forEach((el) => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.dataset.revealPending = '0';
+    });
+  }
+  updateWordReveal() {
+    const spans = this._wordSpans;
+    if (!spans || !spans.length) return;
+    const container = document.getElementById('reveal-statement');
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const vh = window.innerHeight || 800;
+    const startY = vh * 0.82;
+    const endY = vh * 0.30;
+    const progress = Math.max(0, Math.min(1, (startY - rect.top) / (startY - endY)));
+    const total = spans.length;
+    const reveal = progress * total;
+    for (let i = 0; i < total; i++) {
+      const t = Math.max(0, Math.min(1, reveal - i));
+      spans[i].style.color = 'rgba(17,24,39,' + (0.24 + 0.76 * t).toFixed(3) + ')';
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    this.mq.removeEventListener('change', this.onMq);
+    if (this._revealSafety) clearTimeout(this._revealSafety);
+  }
+  icon(kids, color) {
+    return React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: color || '#0E7490', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }, ...kids);
+  }
+  renderVals() {
+    const e = React.createElement;
+    const c = (cx, cy, r) => e('circle', { key: 'c' + cx + cy + r, cx, cy, r });
+    const l = (x1, y1, x2, y2) => e('line', { key: 'l' + x1 + y1 + x2 + y2, x1, y1, x2, y2 });
+    const p = (d) => e('path', { key: 'p' + d, d });
+    const brandName = this.props.brandName ?? 'Spasojević Dental';
+    const phone = this.props.phone ?? '065 504 3698';
+    const telHref = 'tel:' + phone.replace(/[^\d+]/g, '');
+    const brandParts = brandName.trim().split(/\s+/);
+    const brandMain = brandParts[0];
+    const brandSub = brandParts.slice(1).join(' ');
+    const statement = 'Kod nas niste broj u redu. Isti doktor vas prati od prvog pregleda do poslednje kontrole, uz jasan plan i cenu unapred.';
+    const statementWords = statement.split(' ');
+    const dark = this.state.scrolled || this.state.menuOpen;
+    const services = [
+      { title: 'Zubni implanti', desc: 'Trajna zamena za izgubljene zube. Izgledaju i funkcionišu kao vaši prirodni zubi.', icon: this.icon([c(12, 7, 4), l(12, 11, 12, 17), l(9, 20, 15, 20)]) },
+      { title: 'Ortodoncija', desc: 'Ispravljamo nepravilan položaj zuba i zagrižaj kod dece i odraslih.', icon: this.icon([c(7, 12, 3.5), c(17, 12, 3.5), l(10.5, 12, 13.5, 12)]) },
+      { title: 'Fiksne proteze', desc: 'Precizno postavljanje bravica za pravilan zagrižaj i ravan osmeh.', icon: this.icon([l(4, 12, 20, 12), c(7, 12, 2), c(12, 12, 2), c(17, 12, 2)]) },
+      { title: 'Krunice', desc: 'Vraćamo oštećenom zubu oblik, snagu i prirodan izgled.', icon: this.icon([p('M12 4l6 5-6 11-6-11z')]) },
+      { title: 'Mostovi', desc: 'Nadoknada jednog ili više zuba bez hirurškog zahvata.', icon: this.icon([p('M4 16q8-12 16 0'), l(4, 16, 4, 19), l(20, 16, 20, 19)]) },
+      { title: 'Zubne proteze', desc: 'Udobne totalne i parcijalne proteze prilagođene baš vama.', icon: this.icon([p('M4 12a8 5 0 0 1 16 0a8 5 0 0 1-16 0'), l(9, 8, 9, 16), l(15, 8, 15, 16)]) },
+      { title: 'Popravka zuba', desc: 'Bezbolno lečenje karijesa uz kvalitetne bele plombe.', icon: this.icon([l(12, 5, 12, 19), l(5, 12, 19, 12)]) },
+      { title: 'Lečenje kanala korena', desc: 'Spasavamo zub i kada izgleda da je za vađenje.', icon: this.icon([c(12, 6, 2.5), l(12, 9, 12, 20), l(12, 14, 8, 18), l(12, 14, 16, 18)]) },
+      { title: 'Profesionalno čišćenje', desc: 'Uklanjamo kamenac i naslage za zdrave desni i svež dah.', icon: this.icon([l(6, 6, 18, 18), l(18, 6, 6, 18), c(12, 12, 8)]) },
+      { title: 'Beljenje zuba', desc: 'Bezbedno beljenje za nekoliko nijansi svetliji osmeh.', icon: this.icon([p('M12 4l2 5 5 2-5 2-2 5-2-5-5-2 5-2z')]) },
+      { title: 'Estetska stomatologija', desc: 'Fasete i estetske plombe za osmeh kakav ste oduvek želeli.', icon: this.icon([p('M12 4l7 7-7 9-7-9z'), l(5, 11, 19, 11)]) },
+      { title: 'Preventivna stomatologija', desc: 'Redovne kontrole koje sprečavaju velike i skupe probleme.', icon: this.icon([p('M12 4l7 3v5c0 4-3 6.5-7 8-4-1.5-7-4-7-8V7z')]) },
+      { title: 'Dečja stomatologija', desc: 'Strpljiv pristup posle kog se deca ne plaše zubara.', icon: this.icon([c(12, 12, 8), p('M9 14q3 3 6 0'), l(9, 10, 9, 10.5), l(15, 10, 15, 10.5)]) },
+      { title: 'Hitne intervencije', desc: 'Kada zub zaboli, javite se. Primamo vas što pre možemo.', icon: this.icon([p('M13 3L6 14h5l-1 7 7-11h-5z')]) },
+      { title: 'Opšta stomatologija', desc: 'Pregledi, saveti i sve što je potrebno za zdrava usta.', icon: this.icon([c(12, 12, 8), l(12, 9, 12, 15), l(9, 12, 15, 12)]) },
+    ];
+    const trust = [
+      { title: 'Savremeni pristup', desc: 'Radimo sa opremom i materijalima koji se danas koriste u modernim ordinacijama.', icon: this.icon([c(12, 12, 8), c(12, 12, 3)]) },
+      { title: 'Prijatna atmosfera', desc: 'Mirna ordinacija bez gužve i čekanja. Dolazite na svoj termin.', icon: this.icon([c(12, 12, 8), p('M9 13q3 3 6 0')]) },
+      { title: 'Kompletna nega', desc: 'Od dečjeg pregleda do implanta. Ne šaljemo vas od vrata do vrata.', icon: this.icon([p('M12 4l7 3v5c0 4-3 6.5-7 8-4-1.5-7-4-7-8V7z'), l(12, 9, 12, 15), l(9, 12, 15, 12)]) },
+      { title: 'Precizan rad', desc: 'Ne žurimo. Svaki zahvat radimo temeljno, do detalja.', icon: this.icon([c(12, 12, 8), l(12, 4, 12, 8), l(12, 16, 12, 20), l(4, 12, 8, 12), l(16, 12, 20, 12)]) },
+    ];
+    const benefits = [
+      { num: '01', title: 'Jedan doktor vas vodi od početka do kraja', desc: 'Ne prepričavate svoj problem svaki put ispočetka. Doktor koji vas je pregledao vodi i vaše lečenje.' },
+      { num: '02', title: 'Jasan plan i cena pre početka', desc: 'Pre svakog zahvata znate šta radimo, koliko traje i koliko košta. Bez iznenađenja na kraju.' },
+      { num: '03', title: 'Termini se poštuju', desc: 'Zakazujemo tako da ne sedite u čekaonici. Vaše vreme cenimo koliko i svoje.' },
+      { num: '04', title: 'Radimo i popodne', desc: 'Otvoreni smo od 17 do 20 časova, pa možete doći posle posla ili škole.' },
+      { num: '05', title: 'Cela porodica na jednom mestu', desc: 'Deca, roditelji, bake i deke. Svako dobija negu prilagođenu svojim godinama.' },
+    ];
+    const stepData = [
+      { num: '1', title: 'Pregled', desc: 'Detaljno pregledamo zube i desni i saslušamo šta vas muči.' },
+      { num: '2', title: 'Plan terapije', desc: 'Objasnimo šta predlažemo, zašto, i koliko će koštati.' },
+      { num: '3', title: 'Tretman', desc: 'Radimo pažljivo i bez bola, korak po korak.' },
+      { num: '4', title: 'Kontrola i zdrav osmeh', desc: 'Proverimo rezultat i dogovorimo redovne kontrole.' },
+    ];
+    const active = this.state.activeStep;
+    const testimonials = [
+      { text: 'Godinama sam odlagala odlazak zubaru zbog straha. Ovde je sve prošlo bez bola i bez žurbe. Sada dovodim i decu.', name: 'Milica J.', place: 'Trstenik', initial: 'M' },
+      { text: 'Ugradio sam dva implanta. Sve mi je unapred objašnjeno, od cene do svakog koraka. Zub izgleda kao pravi.', name: 'Dragan S.', place: 'Vrnjačka Banja', initial: 'D' },
+      { text: 'Zvala sam ujutru zbog jakog bola, primili su me isti dan. Brzo, ljubazno i korektno. Svaka preporuka.', name: 'Jelena M.', place: 'Trstenik', initial: 'J' },
+    ];
+    const faqs = [
+      { q: 'Koliko traje ugradnja implanta?', a: 'Sama ugradnja traje između 30 i 60 minuta po implantu i radi se u lokalnoj anesteziji. Posle ugradnje sledi period srastanja od nekoliko meseci, pa se tek onda postavlja krunica. Tačan plan dobijate na prvom pregledu.' },
+      { q: 'Da li boli popravka zuba?', a: 'Ne. Radimo u lokalnoj anesteziji, pa tokom zahvata ne osećate bol. Ako imate strah od zubara, recite nam. Prilagodićemo tempo vama.' },
+      { q: 'Koliko traje nošenje fiksne proteze?', a: 'Najčešće između jedne i tri godine, zavisno od toga koliko su zubi pomereni. Posle prvog pregleda i snimka možemo dati preciznu procenu za vaš slučaj.' },
+      { q: 'Kako mogu da zakažem pregled?', a: 'Najbrže telefonom, na broj ' + phone + '. Javite se u radno vreme i dogovorićemo termin koji vam odgovara.' },
+      { q: 'Da li primate hitne slučajeve?', a: 'Da. Ako vas zub zaboli ili se polomi, pozovite nas. Trudimo se da hitne pacijente primimo isti dan.' },
+      { q: 'Da li radite sa decom?', a: 'Da, rado. Prvi dolazak obično iskoristimo da se dete upozna sa ordinacijom, bez ikakvog zahvata, da sledeći put dođe bez straha.' },
+    ];
+    const openFaq = this.state.openFaq;
+    return {
+      brandName, phone, telHref, brandMain, brandSub, statementWords,
+      logoRing: dark ? 'transparent' : 'rgba(11,42,47,0.12)',
+      navBg: dark ? '#FFFFFF' : 'transparent',
+      navBorder: dark ? '#E5E7EB' : 'transparent',
+      navText: dark ? '#111827' : '#FFFFFF',
+      logoBg: dark ? '#0E7490' : '#FFFFFF',
+      logoText: dark ? '#FFFFFF' : '#0B2A2F',
+      navCtaBg: dark ? '#0E7490' : '#FFFFFF',
+      navCtaText: dark ? '#FFFFFF' : '#06231C',
+      navCtaBorder: dark ? '#0E7490' : '#FFFFFF',
+      isMobile: this.state.isMobile,
+      isDesktop: !this.state.isMobile,
+      menuOpen: this.state.menuOpen && this.state.isMobile,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      services, trust, benefits, testimonials,
+      steps: stepData.map((st, i) => ({
+        ...st,
+        select: () => this.setState({ activeStep: i }),
+        bg: active === i ? 'rgba(20,184,166,0.30)' : 'rgba(189,224,224,0.12)',
+        border: active === i ? 'rgba(127,224,212,0.65)' : 'rgba(255,255,255,0.28)',
+        numBg: active === i ? '#FFFFFF' : 'rgba(255,255,255,0.18)',
+        numColor: active === i ? '#0B4C5C' : '#FFFFFF',
+        descColor: active === i ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.75)',
+      })),
+      faqs: faqs.map((f, i) => ({
+        ...f,
+        open: openFaq === i,
+        chev: openFaq === i ? 'rotate(45deg)' : 'rotate(0deg)',
+        toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })),
+      })),
+      hours: [
+        { day: 'Ponedeljak', time: '10-14 · 17-20', color: 'rgba(255,255,255,0.72)' },
+        { day: 'Utorak', time: '10-14 · 17-20', color: 'rgba(255,255,255,0.72)' },
+        { day: 'Sreda', time: '10-14 · 17-20', color: 'rgba(255,255,255,0.72)' },
+        { day: 'Četvrtak', time: '10-14 · 17-20', color: 'rgba(255,255,255,0.72)' },
+        { day: 'Petak', time: '10-14 · 17-20', color: 'rgba(255,255,255,0.72)' },
+        { day: 'Subota', time: 'Ne radimo', color: 'rgba(255,255,255,0.4)' },
+        { day: 'Nedelja', time: 'Ne radimo', color: 'rgba(255,255,255,0.4)' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
